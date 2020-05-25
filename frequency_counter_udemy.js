@@ -11,5 +11,28 @@ same([1, 2, 1], [4, 4, 1]) // false (must be the same frequency)
 */
 
 const same = (arr1, arr2) => {
-  
+  if(arr1.length !== arr2.length) {
+    return false;
+  }
+  const counter = {};
+  for(let i = 0; i < arr1.length; i++) {
+    if(counter[arr1[i] * arr1[i]] === undefined) {
+      counter[arr1[i] * arr1[i]] = 1;
+    } else {
+      counter[arr1[i] * arr1[i]]++;
+    }
+  }
+  for(let h = 0; h < arr2.length; h++) {
+    if(counter[arr2[h]] === undefined) {
+      return false;
+    }
+    if(counter[arr2[h]] === 0) {
+      return false;
+    }
+    if(counter[arr2[h]] > 0) {
+      counter[arr2[h]]--;
+    }
+  }
+
+  return true;
 }
